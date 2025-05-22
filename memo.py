@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from solders.keypair import Keypair
 from solders.pubkey import Pubkey
@@ -13,6 +14,14 @@ import os
 import traceback
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # or specify your frontend domain
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 PHANTOM_EXPORTED_PRIVATE_KEY = "5CVyKvkgKrMhYDMQCzLr24BwGueZ9bameGViisv1yFF9kGmAxFKSYUb1edAD6rhwPN4jdjbbd1GVKyYaFqLePSek"
 
